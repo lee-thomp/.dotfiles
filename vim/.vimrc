@@ -39,6 +39,10 @@ Plugin 'clojure-vim/vim-jack-in'
 " OpenSCAD syntax
 Plugin 'sirtaj/vim-openscad'
 
+" Rainbow braces
+Plugin 'frazrepo/vim-rainbow'
+let g:rainbow_active = 1
+
 call vundle#end()
 filetype plugin indent on
 
@@ -65,5 +69,11 @@ inoremap  <C-W>
 " Ctrl-s to save file
 nmap <C-s>	:w<CR>
 
+" Alt-Shift-O to open files in or under current directory
+map <M-O> :FZF<CR>
+
 " No conceal in markdown files
 autocmd BufEnter *.md set conceallevel=0
+
+" Pull in completions from included libraries
+set complete+=i

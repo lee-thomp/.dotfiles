@@ -1,6 +1,7 @@
 # Shell history
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+setopt HIST_ignore_dups
 
 # create tmux session, attach terminal
 if [ -n "$PS1" ] && [ -z "$TMUX" ]; then
@@ -58,18 +59,23 @@ RPROMPT=$'%(?.. [%F{red}%B%?%b%F{reset}])'
 export EDITOR=nvim
 export VISUAL=nvim
 
-
 ###################
 ### Command Aliases
 alias nv='nvim'
-alias ls='ls --color'
+alias ls='ls --color -h'
 
-alias l='ls --color'
-alias la='ls --color -a'
+alias l='ls --color -h'
+alias la='ls --color -ah'
 alias ll='ls --color -lh'
-alias lla='ls --color -lha'
+alias lla='ls --color -lah'
 
 alias grep='grep --color=always'
+alias less='less -x 4 '
+alias man='PAGER=most man '
+alias ip='ip -c'
+alias py='python3'
+alias ipy='ipython3'
+alias clc='clear'
 
 alias watch='watch -c '
 
@@ -91,12 +97,5 @@ neofetch
 
 # 4 space tab width
 tabs 4
-tabs 4
-tabs 4
-tabs 4
-tabs 4
-tabs 4
-tabs 4
-tabs 4
+
 /usr/bin/setxkbmap -option "ctrl:nocaps"
-setopt HIST_ignore_dups

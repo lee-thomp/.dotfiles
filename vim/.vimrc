@@ -13,6 +13,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="horizontal"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
 " Indent Plugin
 Plugin 'Yggdroot/indentLine'
@@ -28,20 +29,19 @@ Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'preservim/vim-markdown'
 let g:vim_markdown_folding_disabled = 1
 
-" Interactive clojure
-Plugin 'Olical/conjure'
-Plugin 'radenling/vim-dispatch-neovim'
-Plugin 'clojure-vim/vim-jack-in'
-
-" Swank server client
-"Plugin 'kovisoft/slimv'
-
-" OpenSCAD syntax
-Plugin 'sirtaj/vim-openscad'
-
 " Rainbow braces
 Plugin 'frazrepo/vim-rainbow'
 let g:rainbow_active = 1
+
+" PowerShell Syntax
+Plugin 'PProvost/vim-ps1'
+
+" Python completion
+Plugin 'davidhalter/jedi-vim'
+let g:jedi#show_call_signatures = "2"
+
+" Slime
+Plugin 'kovisoft/slimv'
 
 call vundle#end()
 filetype plugin indent on
@@ -73,7 +73,13 @@ nmap <C-s>	:w<CR>
 map <M-O> :FZF<CR>
 
 " No conceal in markdown files
-autocmd BufEnter *.md set conceallevel=0
+autocmd BufEnter,BufReadPre *.md set conceallevel=0
+
+" Fix lisp code comment highlighting
+autocmd BufEnter *.cl,*.lisp syn match Comment #;;.*#
 
 " Pull in completions from included libraries
 set complete+=i
+
+" Live substitution
+set inccommand=nosplit

@@ -105,3 +105,7 @@ tabs 4
 
 # Command not found handler
 source /etc/zsh_command_not_found
+
+# Print date and daily verse on login
+printf "\x1b[33;1m===== \x1b[5m$(date)\x1b[0;33;1m =====\x1b[m\n"
+printf "\x1b[1m$(verse)\x1b[m\n"

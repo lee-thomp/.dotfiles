@@ -83,3 +83,8 @@ set complete+=i
 
 " Live substitution
 set inccommand=nosplit
+
+" Case insensitive file search :e
+set wildignorecase
+
+

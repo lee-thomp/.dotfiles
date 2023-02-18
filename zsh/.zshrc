@@ -3,11 +3,6 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 setopt HIST_ignore_dups
 
-# create tmux session, attach terminal
-if [ -n "$PS1" ] && [ -z "$TMUX" ]; then
-	tmux new-session
-	exit
-fi
 
 # Correct case errors
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -50,7 +45,7 @@ setopt prompt_subst
 
 # User prompt
 autoload -U colors && colors
-PROMPT='%B%F{red}[%F{blue}%n@%m%F{reset} %b%~%B%F{red}]%F{reset}${vcs_info_msg_0_}$%b '
+PROMPT='%B%F{red}[%F{red}%n%b@%B%m:%B%F{blue}%~%B%F{red}]%F{reset}${vcs_info_msg_0_}$%b '
 
 # Right prompt - holds command exit code
 RPROMPT=$'%(?.. [%F{red}%B%?%b%F{reset}])'
@@ -97,5 +92,3 @@ neofetch
 
 # 4 space tab width
 tabs 4
-
-/usr/bin/setxkbmap -option "ctrl:nocaps"

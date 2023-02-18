@@ -1,3 +1,6 @@
+# Catch dumb-term i.e. emacs tramp
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
+
 # Shell history
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
@@ -57,8 +60,7 @@ PROMPT='%B%F{yellow}[%B%F{magenta}%n%b%F{magenta}@%B%F{magenta}%m%F{reset} %b%F{
 RPROMPT=$'%(?.. [%F{red}%B%?%b%F{reset}])'
 
 # Use neovim to edit files
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=emacs
 
 ###################
 ### Command Aliases

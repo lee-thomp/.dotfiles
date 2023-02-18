@@ -51,12 +51,11 @@ PROMPT='%B%F{red}[%F{red}%n%b@%B%m:%B%F{blue}%~%B%F{red}]%F{reset}${vcs_info_msg
 RPROMPT=$'%(?.. [%F{red}%B%?%b%F{reset}])'
 
 # Use neovim to edit files
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR='emacsclient -t'
+export VISUAL='emacsclient -c'
 
 ###################
 ### Command Aliases
-alias nv='nvim'
 alias ls='ls --color -h'
 
 alias l='ls --color -h'
@@ -75,9 +74,7 @@ alias clc='clear'
 alias watch='watch -c '
 
 # Config Aliases
-alias zshrc='nvim ~/.zshrc'
-alias vimrc='nvim ~/.vimrc'
-alias tmuxrc='nvim ~/.tmux.conf'
+alias zshrc='emacsclient -c ~/.zshrc'
 ###################
 
 # User specific environment

@@ -99,3 +99,5 @@ neofetch
 
 # 4 space tab width
 tabs 4
+
+cat TODO.txt

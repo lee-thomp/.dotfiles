@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: big-banner
+# key: bban
+# --
+;; ${1:$(make-string (- 16 (/ (string-width yas-text) 2)) ?\=)} $1 ${1:$(make-string (- 16 (/ (1+ (string-width yas-text)) 2)) ?\=)}

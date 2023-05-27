@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: preamble
+# key: pre
+# --
+#+title:	$0
+#+author: 	`(user-login-name)`
+#+date: 	`(format-time-string "%Y-%m-%d")

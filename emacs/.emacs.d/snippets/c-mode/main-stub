@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: main stub
+# key: main
+# --
+int main (${1:void})
+{
+    $0
+
+    return 0;
+}

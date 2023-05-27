@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: auto-local-include
+# key: ii
+# --
+#include "${1:stdio}.h"
+$0

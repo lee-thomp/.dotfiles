@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: comment banner
+# key: /*=
+# --
+/*${1:$(make-string (- 32 (/ (string-width yas-text) 2)) ?\=)} $1 ${1:$(make-string (- 32 (/ (1+ (string-width yas-text)) 2)) ?\=)}*/

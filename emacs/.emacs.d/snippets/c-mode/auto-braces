@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: auto braces
+# key: {{
+# --
+{
+	$0
+}

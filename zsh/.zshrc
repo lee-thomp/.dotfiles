@@ -101,3 +101,6 @@ neofetch
 tabs 4
 
 cat TODO.txt
+
+# opam configuration
+[[ ! -r /home/lee/.opam/opam-init/init.zsh ]] || source /home/lee/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

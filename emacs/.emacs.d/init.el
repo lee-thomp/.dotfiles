@@ -7,7 +7,7 @@
  '(custom-safe-themes
    '("76f5d6ce2d1792142231cab87260e526db3f8a542c9aaf36fa8e98ea3a339235" "31c0444ad6f28f6d0d6594add71a8960bf5a29f14f0c1e9e5a080b41f6149277" "cd80f569cdd67056b414923f67e3ea4c952876b7f0398b6dd3bb76cad0d6a2d5" "5fdc0f5fea841aff2ef6a75e3af0ce4b84389f42e57a93edc3320ac15337dc10" "71ac1434a07579da9b1ec1dd1a2b9cfa3182523d750678b68db6c25749fb6494" "986cdc701d133f7c6b596f06ab5c847bebdd53eb6bc5992e90446d2ddff2ad9e" default))
  '(package-selected-packages
-   '(rust-mode cider web-mode clojure-mode undo-tree yasnippet sly company geiser-racket modus-themes ligature parinfer-rust-mode linum-relative evil use-package))
+   '(nasm-mode disaster poke poke-mode lsp-mode iedit haskell-mode merlin tuareg magit evil-cleverparens rust-mode cider web-mode clojure-mode undo-tree yasnippet sly company geiser-racket modus-themes ligature parinfer-rust-mode linum-relative evil use-package))
  '(tool-bar-mode nil))
 '(modus-themes ligature parinfer-rust-mode linum-relative evil use-package)
  '(tool-bar-mode nil)
@@ -44,6 +44,9 @@
 ;; All backups in one dir
 (setq backup-directory-alist '(("." . "~/.emacs.tmp/backup")))
 
+;; Word-delimited wrap
+(global-visual-line-mode)
+
 ;; ========================================
 ;; Packages
 
@@ -67,6 +70,7 @@
   (setq evil-want-C-i-jump nil)
   :config
   (define-key evil-normal-state-map (kbd "C-r") 'undo-redo)
+  (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
   (evil-mode))
 
 (add-hook 'ibuffer-mode-hook 'evil-normal-state)
@@ -82,7 +86,16 @@
 
 ;; Parinfer
 (use-package parinfer-rust-mode
-  :hook clojure-mode)
+  :hook '(scheme-mode
+	  clojure-mode
+	  lisp-mode))
+
+
+;; Cleverparens
+(use-package evil-cleverparens
+  :hook '(scheme-mode
+	  clojure-mode
+	  lisp-mode))
  
 
 ;; Company
@@ -110,12 +123,27 @@
   :config
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.tmp/undo-tree"))))
   
+;; Org Babel Racket
+(add-to-list 'load-path "/home/lee/.emacs.d/manual/ob-racket/")
+(use-package ob-racket
+  :after org
+  :config
+  (append '((racket . t) (scribble . t)) org-babel-load-languages))
 
 ;; Web Mode
 (use-package web
   :hook
   html-mode
   )
+
+;; Disaster Mode
+(use-package disaster
+  :config
+  (setq disaster-assembly-mode 'nasm-mode)
+  (setq disaster-objdump "objdump -d -M intel -Sl --no-show-raw-insn"))
+(add-hook 'c-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "C-c d") 'disaster)))
 
 ;; Ligatures
 (use-package ligature
@@ -147,6 +175,8 @@
 	  ("+" (rx (or ">" (+ "+"))))
 	  ;; 0xFF 0x1234
 	  ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
+	  ;; ~~ ~- ~> ~@
+	  ("~" (rx (+ (or "~" "-" ">" "@"))))
 	  ))
   
   (global-ligature-mode))
@@ -155,14 +185,7 @@
 ;; C
 (add-hook 'c-mode-hook '(lambda () (setq c-default-style "linux"
 					 c-basic-offset 4)))
-;; Activate hide-ifdef-mode
-(add-hook 'c-mode-hook 'hide-ifdef-mode)
-;; Hook hide-ifdef-mode to reload hides on file save
-(add-hook 'c-mode-hook '(lambda ()
-			  (add-hook 'after-save-hook '(lambda ()
-							(hide-ifdefs))))
-
-  
 
 ;; Loose hooks
 (add-hook 'org-mode-hook 'visual-line-mode)
+
